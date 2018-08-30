@@ -1,0 +1,33 @@
+##其实上这三个关键词还是比较好分辨的，因为这三个完全用在不同的领域
+final可以用来修饰类、方法和变量，修饰的class代表不可以继承和扩展，final修饰的变量是不可修改的，而final修饰的方法则是不可以重写
+finally则是java保证代码一定被执行的一种机制，try-catch-finally 
+finalize则是基础类，Java.lang.Object，保证对象在垃圾回收前完成特定的资源回收，JDK9开始标记为过时
+
+我们观察很多在maven上引用下来的类库，很多的class都是由final进行修饰，这样可以有效避免API使用者更改基础功能,从一定程度上
+来讲，保证了平台的安全性。
+通过final修饰变量，我们可以有效避免意外赋值导致的程序偏差
+final 变量产生了某种程度的不可变（immutable）的效果，所以可以保护只读数据，可以免去一些防御性拷贝，从而提高同步开销
+final在很多书籍中还被讲到，在特定的环境中，可以提高JVM的性能，比如使用final可以帮助JVM内联，可以改善编译器进行条件编译
+的性能，不过大部分情况下，不用考虑这个情况，要相信JVM是很智能的。
+
+对于finally明确知道怎么使用就可以了，要关闭的连接等资源，更推荐使用 Java 7 中添加的 try-with-resources
+在某些情况下，finally是不会被执行的
+ try{
+    System.exit(1);
+ }finally{
+    System.out.println(“111");
+ }
+ 当未进入try片段时，finally就不会被执行或者向上述代码一样，System.exit(1);JVM被关闭，那么finally也不会被执行
+ 
+ 对于finalize来说，我们要明确这不是一个好方法，为什么？
+ 因为你无法保证finalize什么时候执行，执行是否符合预期。使用不当会导致线程挂起，死锁等原因。
+ 
+ 另外需要注意的是，final不是immutable
+ final只能限制应用对象不被赋值，而引用对象的行为不被final影响
+ final Map map = new HashMap();
+ map = new HashMap()//限制
+ map.put("str","1");//不被限制
+ 
+ 现在Java平台正在逐步使用java.lang.ref.Cleaner机制来取代finalze
+ 
+ 
