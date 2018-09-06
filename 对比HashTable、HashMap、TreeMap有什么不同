@@ -6,3 +6,20 @@ HashTable是Java早期线程同步的一个哈希表的实现，因为同步需�
 HashMap则是应用更加广泛的哈希表的实现，行为上大致与HashTable一致，主要区别在于HashMap是不同步的，支持null键和值等，
 通常情况下，HashMap进行put或者get操作，可以达到常数时间的性能，所以它是绝大多数利用键值对存取的场景。
 
+TreeMap则是基于红黑树的一种提供顺序访问的Map,和HashMap不同，它的get、put、remove之类的操作都是O的时间复杂度，
+具体顺序可以由指定的Comparator来决定，或者根据键的自然顺序来判断。
+
+Map虽然通常被包括在Java集合框架，但是实际上不是狭义上的Collection（集合）
+
+HashTable比较特别，它在扩展上于Dictionary，与HashMap的类结构不一样
+HashMap等Map都是扩展了AbstractMap,里面包含了通用方法的抽象。
+
+大部分的Map应用场景，通常就是放入，访问或者删除，而对顺序没有特别的要求，HashMap是这种情况的最好选择。
+LinkedHashMap遍历顺序符合插入顺序
+TreeMap自然顺序符合一个约定
+
+HashMap源码分析
+
+Hash冲突
+再哈希法 
+这种方法是同时构造多个不同的哈希函数，当哈希冲突时，再计算，知道冲突不在产生，这个不容易产生聚集，但增加了计算时间。
