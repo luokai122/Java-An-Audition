@@ -1,0 +1,8 @@
+##HashTable、HashMap、TreeMap的区别
+HashTable、HashMap、TreeMap都是常用的一些Map实现，是以键值对的形式存储和操作数据的容器类型。
+
+HashTable是Java早期线程同步的一个哈希表的实现，因为同步需要消耗更多的资源，所以现在已经很少推荐使用了。
+
+HashMap则是应用更加广泛的哈希表的实现，行为上大致与HashTable一致，主要区别在于HashMap是不同步的，支持null键和值等，
+通常情况下，HashMap进行put或者get操作，可以达到常数时间的性能，所以它是绝大多数利用键值对存取的场景。
+
